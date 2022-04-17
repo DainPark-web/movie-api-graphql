@@ -1,14 +1,27 @@
 import { Link } from "react-router-dom";
+import styled from "styled-components";
 
+const Container = styled(Link)`
+    height: 480px;
+    border-radius: 7px;
+    overflow: hidden;
+`
 
+const Poster = styled.div`
+    background-image: url(${props => props.bg});
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    
+`
 
-const Movie = ({title, image, idN}) => {
+const Movie = ({title,summary,rating, image, idN}) => {
     return (
-        <Link to={`/${idN}`}>
-            <div>
-                {title}
-            </div>
-        </Link>
+        <Container to={`/${idN}`}>
+            <Poster bg={image} />
+        </Container>
     )
 }
 

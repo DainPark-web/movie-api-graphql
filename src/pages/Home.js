@@ -8,7 +8,7 @@ const GET_MOVIES = gql`
     movies{
     id
     title
-    background_image
+    medium_cover_image
   }
   }
 `
@@ -47,6 +47,9 @@ const MoviesContainer = styled.div`
     width: 80%;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    padding: 50px 0px;
+    grid-gap: 20px;
+    
 
 `
 
@@ -68,7 +71,7 @@ const Home =() => {
         {!loading && data.movies && 
             data.movies.map((e,i) => {
                 return (
-                    <Movie key={e.id} title={e.title} image={e.background_image} idN={e.id} />                    
+                    <Movie key={e.id} title={e.title} image={e.medium_cover_image} rating={e.rating} summary={e.summary} idN={e.id} />                    
                 )
             })
         }
