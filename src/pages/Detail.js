@@ -12,9 +12,17 @@ const GET_MOVIE = gql`
             rating
             summary
         }
+        suggestion(id: $id){
+          id
+          medium_cover_image
+          title
+        }
+     
     }
 
 `
+
+
 const Container = styled.div`
   height: 100vh;
   background-image: linear-gradient(-45deg, #d754ab, #fd723a);
@@ -27,6 +35,7 @@ const Container = styled.div`
 
 const Column = styled.div`
   margin-left: 10px;
+  width: 40%;
   
 `;
 
@@ -47,11 +56,12 @@ const Description = styled.p`
 
 const Poster = styled.div`
   width: 25%;
-  height: 60%;
+  height: 70%;
   background: url(${props => props.bg});
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
+  
   /* background-color: transparent; */
 
 `;
@@ -65,15 +75,22 @@ export default () => {
  if(loading){
      return "loading"
  }
- if(!loading){
+ if(!loading && data && data.movie){
     return (
         <Container>
           <Column>
             <Title>{data.movie.title}</Title>
             <Subtitle>{data.movie.language} · {data.movie.rating}</Subtitle>
-            <Description>{data.movie.summary.length > 100 ? data.movie.summary.slice(0, 100) + "..." : data.movie.summary}</Description>
+            <Description>{data.movie.summary.length > 1000 ? data.movie.summary.slice(0, 1000) + "..." : data.movie.summary}</Description>
           </Column>
           <Poster bg={data.movie.medium_cover_image}></Poster>
+          {data.suggestion?.map((e) => {
+            return (
+              <div key={e.id}>
+                {e.title}
+              </div>
+            )
+          })}
         </Container>
       );
  }

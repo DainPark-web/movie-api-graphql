@@ -5,6 +5,9 @@ const Container = styled(Link)`
     height: 480px;
     border-radius: 7px;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 `
 
 const Poster = styled.div`
@@ -21,6 +24,9 @@ const Movie = ({title,summary,rating, image, idN}) => {
     return (
         <Container to={`/${idN}`}>
             <Poster bg={image} />
+            <div>
+            <button>Like</button>
+            </div>
         </Container>
     )
 }
