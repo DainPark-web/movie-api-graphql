@@ -25,14 +25,14 @@ const Poster = styled.div`
     
 `
 
-const Movie = ({title,summary,rating, image, idN}) => {
+const Movie = ({title,summary,rating,isLiked, image, idN}) => {
     return (
         <Container>
             <LinkContainer to={`/${idN}`}>
                 <Poster bg={image} />
             </LinkContainer>
             <div>
-            <button>Like</button>
+            <button>{isLiked ? "Unlike": "Like"}</button>
             </div>
         </Container>
     )

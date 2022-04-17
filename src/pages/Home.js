@@ -9,6 +9,7 @@ const GET_MOVIES = gql`
     id
     title
     medium_cover_image
+    isLiked @client
   }
   }
 `
@@ -55,7 +56,7 @@ const MoviesContainer = styled.div`
 
 const Home =() => {
     const {loading, error, data} =useQuery(GET_MOVIES);
-
+    console.log(error);
     return (
         <>
         <Helmet>
@@ -71,7 +72,7 @@ const Home =() => {
         {!loading && data.movies && 
             data.movies.map((e,i) => {
                 return (
-                    <Movie key={e.id} title={e.title} image={e.medium_cover_image} rating={e.rating} summary={e.summary} idN={e.id} />                    
+                    <Movie key={e.id} title={e.title} isLiked={e.isLiked} image={e.medium_cover_image} rating={e.rating} summary={e.summary} idN={e.id} />                    
                 )
             })
         }
