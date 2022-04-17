@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { gql, useQuery } from "@apollo/client";
+import Movie from "../components/Movie";
 
 
 const GET_MOVIES = gql`
@@ -17,36 +18,25 @@ const Home =() => {
     const {loading, error, data} =useQuery(GET_MOVIES);
     console.log(loading, error, data);
 
-    if(loading){
-        return (
-            <div>
-            <Helmet>
-                <title>Loading...</title>
-            </Helmet>
-            <div>Loading...</div>
-            </div>
-            )
-    }
+    return (
+        <>
+        <Helmet>
+            <title>Home</title>
+        </Helmet>
+        {loading && <div>Loading...</div>}
 
+        {!loading && data.movies && 
+            data.movies.map((e,i) => {
+                return (
+                    <Movie key={e.id} />                    
+                )
+            })
+        }
+        </>
+        
+    )
 
-    if(!loading){
-        return (
-            <>
-            <Helmet>
-                <title>Home</title>
-            </Helmet>
-            {
-                data.movies.map((e,i) => {
-                    return (
-                        <div key={i}>{e.title}</div>
-                    )
-                })
-            }
-            </>
-            
-        )
-
-    }
+    
 
     
 }
