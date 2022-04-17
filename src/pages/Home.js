@@ -28,7 +28,7 @@ const Home =() => {
         {!loading && data.movies && 
             data.movies.map((e,i) => {
                 return (
-                    <Movie key={e.id} />                    
+                    <Movie key={e.id} title={e.title} image={e.background_image} idN={e.id} />                    
                 )
             })
         }

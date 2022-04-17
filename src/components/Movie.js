@@ -1,7 +1,14 @@
-const Movie = () => {
+import { Link } from "react-router-dom";
+
+
+
+const Movie = ({title, image, idN}) => {
     return (
-        <div>
-        </div>
+        <Link to={`/${idN}`}>
+            <div>
+                {title}
+            </div>
+        </Link>
     )
 }
 
